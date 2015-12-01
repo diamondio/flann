@@ -234,6 +234,29 @@ flannlib.flann_build_index_%(C)s.argtypes = [
 flann.build_index[%(numpy)s] = flannlib.flann_build_index_%(C)s
 """)
 
+flann.add_points = {}
+define_functions(r"""
+flannlib.flann_add_points_%(C)s.restype = None
+flannlib.flann_add_points_%(C)s.argtypes = [
+        FLANN_INDEX, # index_id
+        ndpointer(%(numpy)s, ndim = 2, flags='aligned, c_contiguous'), # points
+        c_int, # rows
+        c_int, # cols
+        c_int, # rebuild_threshhold
+]
+flann.add_points[%(numpy)s] = flannlib.flann_add_points_%(C)s
+""")
+
+flann.remove_point = {}
+define_functions(r"""
+flannlib.flann_remove_point_%(C)s.restype = None
+flannlib.flann_remove_point_%(C)s.argtypes = [
+        FLANN_INDEX, # index_id
+        c_uint, # point_id
+]
+flann.remove_point[%(numpy)s] = flannlib.flann_remove_point_%(C)s
+""")
+
 flann.save_index = {}
 define_functions(r"""
 flannlib.flann_save_index_%(C)s.restype = None
